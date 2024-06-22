@@ -26,10 +26,10 @@ class Memory(ABC):
         index2 = block
         index3 = 2 * block
         for i in range(block):
-            str += f"|\t0x{index1}\t|\t{self.memory[index1]}\t|"
-            str += f"\t0x{index2}\t|\t{self.memory[index2]}\t|"
+            str += f"|\t0x{index1:x}\t|\t{self.memory[index1]:x}\t|"
+            str += f"\t0x{index2:x}\t|\t{self.memory[index2]:x}\t|"
             if (index3 < len(self.memory)) :
-                str += f"\t0x{index3}\t|\t{self.memory[index3]}\t|\n"
+                str += f"\t0x{index3:x}\t|\t{self.memory[index3]:x}\t|\n"
             else :
                 str += f"\t\t|\t\t|\n"
             index1 += 1
