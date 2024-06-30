@@ -2,19 +2,34 @@ from abc import ABC, abstractmethod
 import math
 
 class Memory(ABC):
-    def __init__(self, name:str, capacity:int, wordSize:int, nextMemoryLevel:"Memory" = None):
+    def __init__(self, name:str, size:int, wordSize:int, nextMemoryLevel:"Memory" = None):
         self.name = name
         self.nextMemoryLevel = nextMemoryLevel
         self.wordSize = wordSize
-        self.memory = bytearray(capacity)
+        self.memory = bytearray(size * wordSize)
     
-    @abstractmethod
-    def read(self, address) -> bytearray:
-        pass
+    def ReadPage(self, page:int) -> bytearray:
+        data = bytearray(self.wordSize)
+        address = page * self.wordSize
+        for i in range(self.wordSize):
+            data[i] = self.memory[address]
+            address += 1
+        return data
+
+    def WritePage(self, page:int, data:bytearray):
+        address = page * self.wordSize
+        for i in range(self.wordSize):
+            self.memory[address] =  data[i]
+            address += 1
 
     @abstractmethod
-    def write(self, address:int, data:bytearray):
+    def Read(self, page:int, data:bytearray):
         pass
+    
+    @abstractmethod
+    def Write(self, page:int, data:bytearray):
+        pass
+
 
     def __str__(self):
         str = "-" * 97 + "\n"
