@@ -18,8 +18,6 @@ class TLB:
         physicalPageNumber:int
         previousPage = None
         if not self.availableAddresses:
-            print("No hay direcciones disponibles")
-            print(self.availableAddresses)
             # Remover la entrada menos recientemente usada
             previousPage = self.accessOrder.pop(0)
             physicalPageNumber = self.entries[previousPage]

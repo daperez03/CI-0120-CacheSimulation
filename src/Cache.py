@@ -20,11 +20,9 @@ class Cache(Memory):
     def Write(self, page:int, data:bytearray):
         physicalPage = self.TLB.Lookup(page)
         if (physicalPage == None):
-            print("physicalPage is None")
             # previousPage es la pagina que sale para escribir la nueva
             physicalPage, previousPage = self.TLB.AddEntry(page)
             if (previousPage != None):
-                print("previousPage is not None")
                 # si se saco una pagina, se escribe en el proximo nivel
                 previousData = self.ReadPage(physicalPage)
                 self.nextMemoryLevel.Write(previousPage, previousData)
