@@ -10,18 +10,20 @@ class TLB:
             # Mover la entrada al final de la lista de acceso (LRU)
             self.accessOrder.remove(virtualPageNumber)
             self.accessOrder.append(virtualPageNumber)
-            return self.entries[virtualPageNumber].physicalPageNumber
+            return self.entries[virtualPageNumber]
         else:
             return None
 
     def AddEntry(self, virtualPageNumber) -> tuple[int, int|None]:
         physicalPageNumber:int
-        previusPage = None
-        if len(self.entries) >= self.size:
+        previousPage = None
+        if not self.availableAddresses:
+            print("No hay direcciones disponibles")
+            print(self.availableAddresses)
             # Remover la entrada menos recientemente usada
-            previusPage = self.accessOrder.pop(0)
-            physicalPageNumber = self.entries[previusPage]
-            del self.entries[previusPage]
+            previousPage = self.accessOrder.pop(0)
+            physicalPageNumber = self.entries[previousPage]
+            del self.entries[previousPage]
         else:
             # obtener nueva direccion fisica
             physicalPageNumber = self.availableAddresses.pop()
@@ -29,7 +31,9 @@ class TLB:
         # Añadir la nueva entrada
         self.entries[virtualPageNumber] = physicalPageNumber
         self.accessOrder.append(virtualPageNumber)
-        return physicalPageNumber, previusPage
+        return physicalPageNumber, previousPage
     
     def __str__(self):
-        return str(self.entries)
+        string = "\t\t\t\t\tTLB \n"
+        string += str(self.entries)
+        return string

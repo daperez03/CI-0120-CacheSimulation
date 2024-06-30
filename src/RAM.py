@@ -1,7 +1,7 @@
 from Memory import Memory
 
 class RAM(Memory):
-    def __init__(self, name:str, size:int, wordSize:int, nextMemoryLevel:"Memory" = None):
+    def __init__(self, name:str, size:int, wordSize:int, nextMemoryLevel:Memory=None):
         super().__init__(name, size, wordSize, nextMemoryLevel)
 
     def Read(self, page) -> bytearray:
