@@ -48,3 +48,4 @@ Las siguientes dependencias son necesarias para ejecutar el programa:
 ## Integrantes
 
 - [Daniel Pérez Morera](mailto:daniel.perezmorera@ucr.ac.cr)
+- [Sebastián Sánchez Sandí](mailto:sebastian.sanchezsandi@ucr.ac.cr)
